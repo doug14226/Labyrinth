@@ -1,1 +1,0 @@
-/usr/bin/clang++  -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/lucca.dir/src/labyrinth.cpp.o CMakeFiles/lucca.dir/src/lucca.cpp.o CMakeFiles/lucca.dir/lucca/main.cpp.o  -o lucca 

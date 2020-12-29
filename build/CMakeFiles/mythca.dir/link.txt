@@ -1,1 +1,0 @@
-/usr/bin/clang++  -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/mythca.dir/src/labyrinth.cpp.o CMakeFiles/mythca.dir/src/lucca.cpp.o CMakeFiles/mythca.dir/lucca/main.cpp.o  -o mythca 
