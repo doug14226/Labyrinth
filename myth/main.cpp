@@ -51,7 +51,7 @@ int main(int argc, const char * argv[]) {
         sFnameDraw = Fname + ".L.svg";
         if (!filesystem::exists( sFnameJson.c_str() )) R -> writeJsonFile( sFnameJson);
         if (!filesystem::exists( sFnameGraph.c_str() )) R -> drawGraph( sFnameGraph);
-        if (!filesystem::exists( sFnameDraw.c_str() )) R -> writeJsonFile( sFnameDraw);
+        if (!filesystem::exists( sFnameDraw.c_str() )) R -> drawLucca( sFnameDraw);
 
     } else {
         Fname = (L -> lName());
@@ -60,7 +60,7 @@ int main(int argc, const char * argv[]) {
         sFnameDraw = Fname + ".L.svg";
         if (!filesystem::exists( sFnameJson.c_str() )) L -> writeJsonFile( sFnameJson);
         if (!filesystem::exists( sFnameGraph.c_str() )) L -> drawGraph( sFnameGraph);
-        if (!filesystem::exists( sFnameDraw.c_str() )) L -> writeJsonFile( sFnameDraw);
+        if (!filesystem::exists( sFnameDraw.c_str() )) L -> drawLucca( sFnameDraw);
     }
 
 std::cout << "Total, BackBites!\n";
