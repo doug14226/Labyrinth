@@ -15,7 +15,8 @@ int main(int argc, const char * argv[]) {
     uint seed;
     std::string randseed;
     string arg1;
-    string Fname, jsonFname, GFname, MFname;;
+    string Fname;
+    string sFnameJson, sFnameGraph, sFnameDraw;
     randseed = std::string("3912191E");
     seed = std::stoul( "3912191E", NULL, 16 );
     srand(seed );
@@ -47,8 +48,13 @@ int main(int argc, const char * argv[]) {
         L -> reflection(R);
     } 
 
-    L -> lName(jsonFname);
-    if (!filesystem::exists( jsonFname )) L -> writeJsonFile(jsonFname);
+    Fname = (L -> lName());
+    sFnameJson = Fname + ".json";
+    sFnameGraph = Fname + ".G.svg";
+    sFnameDraw = Fname + ".L.svg";
+    if (!filesystem::exists( sFnameJson.c_str() )) L -> writeJsonFile( sFnameJson);
+    if (!filesystem::exists( sFnameGraph.c_str() )) L -> drawGraph( sFnameGraph);
+    if (!filesystem::exists( sFnameDraw.c_str() )) L -> drawLucca( sFnameDraw);
 
         
 std::cout << "Total, BackBites!\n";
