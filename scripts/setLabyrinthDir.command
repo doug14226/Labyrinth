@@ -1,5 +1,5 @@
 #!/bin/zsh
-#set directory for new .json files
+#set directory for new Labyrinth .json and .svg files
 dirLabyrinth="$(cat ~/.Labyrinth)"
 pushd $dirLabyrinth
 selectedDir="$(/usr/local/bin/python3 /Users/douglaslange/ProjectsCpp/Labyrinth/scripts/getDirectory.py)"

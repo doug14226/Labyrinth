@@ -8,7 +8,6 @@ cat > genSMyth.command << EOS
 #!/bin/zsh
 dirLabyrinth="\$(cat ~/.Labyrinth)"
 pushd \$dirLabyrinth
-#gen smyth for new .json files
 randH="\$(hexdump -n 8 -e '2/4 "%08X" 1 "\n"' /dev/random)"
 $app \$randH
 popd
@@ -21,7 +20,6 @@ cat > genMyth.command << EOS
 #!/bin/zsh
 dirLabyrinth="\$(cat ~/.Labyrinth)"
 pushd \$dirLabyrinth
-#gen smyth for new .json files
 randH="\$(hexdump -n 8 -e '2/4 "%08X" 1 "\n"' /dev/random)"
 $app \$randH
 popd
@@ -32,7 +30,7 @@ chmod 755 genMyth.command
 pyPath="$(realpath getDirectory.py)"
 cat > setLabyrinthDir.command << EOS
 #!/bin/zsh
-#set directory for new .json files
+#set directory for new Labyrinth .json and .svg files
 dirLabyrinth="\$(cat ~/.Labyrinth)"
 pushd \$dirLabyrinth
 selectedDir="\$(/usr/local/bin/python3 $pyPath)"
@@ -44,7 +42,6 @@ app="$(realpath ../build/labyrinth)"
 pyPath="$(realpath graphSize.py)"
 cat > genLabyrinth.command << EOS
 #!/bin/zsh
-#set rows and Cols for new lanyrinth .json files
 dirLabyrinth="\$(cat ~/.Labyrinth)"
 pushd \$dirLabyrinth
 rc="\$(/usr/local/bin/python3 $pyPath)"

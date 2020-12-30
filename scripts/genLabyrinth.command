@@ -1,5 +1,4 @@
 #!/bin/zsh
-#set rows and Cols for new lanyrinth .json files
 dirLabyrinth="$(cat ~/.Labyrinth)"
 pushd $dirLabyrinth
 rc="$(/usr/local/bin/python3 /Users/douglaslange/ProjectsCpp/Labyrinth/scripts/graphSize.py)"
