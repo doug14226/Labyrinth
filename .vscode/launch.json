@@ -1,78 +1,80 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [ 
-      {
-        "type": "bashdb",
-        "request": "launch",
-        "name": "Bash-Debug /myth/genMyth.command)",
-        "cwd": "${workspaceFolder}/myth",
-        "program": "${workspaceFolder}/myth/genMyth.command",
-        "args": []
-      },
-      {
-        "type": "zshdb",
-        "request": "launch",
-        "name": "Zsh-Debug /myth/make.command",
-        "cwd": "${workspaceFolder}/myth",
-        "program": "${workspaceFolder}/myth/make.command",
-        "args": []
-      },
-
-      {
-        "name": "labyrinth -- debug",
-        "type": "cppdbg",
-        "request": "launch",
-        "program": "${workspaceFolder}/build/labyrinth",
-        "args": ["31", "20", "3912191E"],
-        "stopAtEntry": true,
-        "cwd": "${workspaceFolder}/test",
-        "environment": [],
-        "externalConsole": false,
-        "MIMode": "lldb",
-//        "preLaunchTask": "clang++ build active file"
-      },
-      {
-        "name": "lucca -- debug",
-        "type": "cppdbg",
-        "request": "launch",
-        "program": "${workspaceFolder}/build/lucca",
-        "args": [],
-        "stopAtEntry": true,
-        "cwd": "${workspaceFolder}/test",
-        "environment": [],
-        "externalConsole": false,
-        "MIMode": "lldb",
-//        "preLaunchTask": "clang++ build active file"
-      },
-      {
-        "name": "myth -- debug",
-        "type": "cppdbg",
-        "request": "launch",
-        "program": "${workspaceFolder}/build/myth",
-        "args": ["3912191E"],
-        "stopAtEntry": true,
-        "cwd": "${workspaceFolder}/test",
-        "environment": [],
-        "externalConsole": false,
-        "MIMode": "lldb",
-//        "preLaunchTask": "clang++ build active file"
-      },,
-      {
-        "name": "smyth -- debug",
-        "type": "cppdbg",
-        "request": "launch",
-        "program": "${workspaceFolder}/build/smyth",
-        "args": ["3912191E"],
-        "stopAtEntry": true,
-        "cwd": "${workspaceFolder}/test",
-        "environment": [],
-        "externalConsole": false,
-        "MIMode": "lldb",
-//        "preLaunchTask": "clang++ build active file"
-      }      
-
-    ]
-  }
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python: Current File",
+      "type": "python",
+      "request": "launch",
+      "program": "${file}",
+      "console": "integratedTerminal"
+    },
+    {
+      "type": "zshdb",
+      "request": "launch",
+      "name": "Zsh-Debug (current file)",
+      "cwd": "${fileDirname}",
+      "program": "${file}",
+      "args": []
+    },
+    {
+      "name": "labyrinth -- debug",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/labyrinth",
+      "args": [
+        "31",
+        "20",
+        "3912191E"
+      ],
+      "stopAtEntry": true,
+      "cwd": "${workspaceFolder}/test",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb",
+    },
+    {
+      "name": "lucca -- debug",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/lucca",
+      "args": [],
+      "stopAtEntry": true,
+      "cwd": "${workspaceFolder}/test",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb",
+    },
+    {
+      "name": "myth -- debug",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/myth",
+      "args": [
+        "3912191E"
+      ],
+      "stopAtEntry": true,
+      "cwd": "${workspaceFolder}/test",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb",
+    },
+    ,
+    {
+      "name": "smyth -- debug",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/smyth",
+      "args": [
+        "3912191E"
+      ],
+      "stopAtEntry": true,
+      "cwd": "${workspaceFolder}/test",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "lldb",
+    }
+  ]
+}
