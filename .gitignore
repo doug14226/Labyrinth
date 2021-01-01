@@ -2,3 +2,6 @@ CMakeFiles
 build
 .DS_Store
 CMakeCache.txt
+.README.md
+settings.json
+tasks.json
