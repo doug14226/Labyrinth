@@ -8,9 +8,9 @@
 
 #include "lucca.hpp"
 
-  lucca::lucca(int nr, int nc): labyrinth::labyrinth(nr,nc) {
+ lucca::lucca(int nr, int nc): labyrinth::labyrinth(nr,nc) {
    
-};
+ };
 
 int lucca::complete() {
     cell * scell, * fcell;
@@ -134,7 +134,8 @@ int lucca::luccaQ() {
             } else n=0;
         }
     }
-    if (k > 2) return 0;
+//    if (k > 2) return 0;
+    if (k > 0) return 0;
     
     // force at least one and no more than two diversions
     // from entery and exit columns
@@ -152,7 +153,6 @@ int lucca::luccaQ() {
     }
     return 1;
 }
-        
         
 int lucca::luccaIdx(cell* C) {
     int i = 0;
@@ -277,4 +277,37 @@ void lucca::drawLucca(string name) {
     cairo_fill(ctx);
     cairo_destroy(ctx);
     cairo_surface_destroy (surface);
+}
+
+lucca* luccaFromGridJsonFile(string  name) {
+    
+    std::ifstream f(name, std::ios::in | std::ios::binary);     // Open the jsonn stream 
+    const auto sz = std::filesystem::file_size(name);                        // Obtain the size of the file.
+    std::string j(sz, '\0');                                        // Create a buffer.
+
+    // Read the whole file into the buffer.
+    f.read(j.data(), sz);
+    json jobject = json::parse(j);
+    json jgraph = jobject["graph"];   //if not found then jgraph is null
+    json jnodes = jgraph["nodes"];
+    json jedges = jgraph["edges"];
+    int rows = jgraph["metadata"]["rows"];
+    int cols = jgraph["metadata"]["cols"];
+    bool directedQ = jgraph["directed"];
+    lucca * L = new lucca(rows,cols);
+    int k = jedges.size();
+    for (int i=0; i<k; i++) { 
+        auto jedge = jedges.at(i) ;
+        string ss = jedge["source"];
+        string tt = jedge["target"];
+        int srow = jnodes[ss]["metadata"]["row"];
+        int scol = jnodes[ss]["metadata"]["col"];
+        int trow = jnodes[tt]["metadata"]["row"];
+        int tcol = jnodes[tt]["metadata"]["col"];
+        auto target = L ->  getCell(trow,tcol) ;   //cell *
+        auto source = L ->  getCell(srow,scol) ;
+        source -> link(target);
+        if (!directedQ) target -> link(source);
+    }
+    return L;
 }

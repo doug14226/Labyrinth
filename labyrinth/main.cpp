@@ -9,7 +9,8 @@
 
 #include "labyrinth.hpp"
 #include  <ctime>
-
+using namespace std;
+using namespace __fs;
 int main(int argc, const char * argv[]) {
  // arguments: rows cols seed
     int  i, r, c, h;

@@ -9,7 +9,7 @@
 #include "lucca.hpp"
 #include <filesystem>
 using namespace std; 
-
+using namespace __fs;
 int main(int argc, const char * argv[]) {
     int b, i;
     uint seed;

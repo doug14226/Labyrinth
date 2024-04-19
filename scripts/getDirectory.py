@@ -2,7 +2,7 @@
 
 from os import getcwd
 
-from PySide2.QtWidgets import QApplication, QFileDialog
+from PySide6.QtWidgets import QApplication, QFileDialog
 
 
 if __name__ == "__main__":

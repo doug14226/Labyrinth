@@ -13,10 +13,13 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <nlohmann/json.hpp>
+#include <filesystem>
+using json = nlohmann::json;
 #include <cmath>
 extern "C" {
-    #include <cairo.h>
-    #include <cairo-svg.h>
+    #include <cairo/cairo.h>
+    #include <cairo/cairo-svg.h>
 }
 using namespace std;
 const int north = 0;
@@ -29,15 +32,17 @@ class cell {
     friend class lucca;
 
     friend class labyrinth;
+protected:
     int row;
     int column;
     cell * nearby[4];
     cell * links[4];
-    void link(cell * cellToLink);
     void unlink(cell * cellToUnlink);
     int  countLinks();
     int  countNearby();
     cell * getNextCell(cell * last);
+public:
+    void link(cell * cellToLink);
 };
 
 
@@ -53,15 +58,19 @@ protected:
     cell * getTargetCell(cell * head);
 
 public:
-    labyrinth(int, int);                    // labyrinth constructor  
+    labyrinth(int, int);                    // labyrinth constructor
+    ~labyrinth();                           // destructor
     void seed();                            // seed labyrinth with simple Hamilton Path
-    void step(int, int);                    // seed by walk, step drow then dcol from current
+    void setCurrent(int,int);               
+    void step(int, int);                    //  step drow then dcol from current
+    cell * getCell(int r, int c);                  
     void backBite();
     int  complete();
     void writeJsonFile(string  name);
     int hamiltonPathQ();                    //  should be private
     void reflection(labyrinth*);
     void mirror(labyrinth*);
+    void paste(labyrinth*, int, int);       // past smaller labyrinthnat delta r and delta c
     void setRandSeed(std::string);
     void setBackBites(int);
     void drawGraph(string name);
@@ -70,4 +79,7 @@ public:
 
 int sign(int x);
 bool fexists(const char *filename);
+
+labyrinth* fromJsonFile(string  name);
+
 #endif /* labyrinth_hpp */

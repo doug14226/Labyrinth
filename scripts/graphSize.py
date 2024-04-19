@@ -3,9 +3,9 @@ import sys
 import os
 
 
-from PySide2.QtWidgets import QApplication, QWidget, QSpinBox, QPushButton
-from PySide2.QtCore import QFile, QCoreApplication, Qt
-from PySide2.QtUiTools import QUiLoader
+from PySide6.QtWidgets import QApplication, QWidget, QSpinBox, QPushButton
+from PySide6.QtCore import QFile, QCoreApplication, Qt
+from PySide6.QtUiTools import QUiLoader
 
 
 class MazeSize(QWidget):

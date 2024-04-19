@@ -129,6 +129,10 @@ cell * cell::getNextCell(cell * last) {
     current = grid;
 }
 
+labyrinth::~labyrinth() {
+    free(grid);
+}
+
 int labyrinth::complete() {
 
     int start, finish;
@@ -171,6 +175,10 @@ void labyrinth::seed(){
     }
 }
 
+void labyrinth::setCurrent(int r,int c) {
+    current = &grid[r*columns+c];
+}
+
 void labyrinth::step(int drow, int dcol){
     int cr, cc, i, ir, ic;
     cell * next;
@@ -204,6 +212,10 @@ cell * labyrinth::getTargetCell(cell * head) {
         }
     }
     return 0;
+}
+
+cell * labyrinth::getCell(int r, int c) {
+    return &grid[r*columns+c];
 }
 
 cell * labyrinth::getHead() {
@@ -431,6 +443,25 @@ void labyrinth::mirror(labyrinth *original) {
     }
 }
 
+void labyrinth::paste(labyrinth *insert, int dr, int dc) {
+    int r, c, i;
+    cell * ccell;
+    cell * icell;
+    int icolumns = insert -> columns ;
+    int irows= insert -> rows ;
+    for (c=0; c<(icolumns); c++) {
+        for (r=0; r<(insert -> rows); r++) {
+            icell = &insert->grid[r*icolumns+c];
+            ccell = &grid[(r+dr)*columns+c+dc];
+            for (i=0;i<4;i++){
+                if (icell->links[i]) {
+                    ccell->links[i] = ccell->nearby[i];
+                }
+            }
+
+        }
+    }
+}
 
 void labyrinth::setRandSeed(std::string randomHex) {
     randseed = randomHex;
@@ -451,3 +482,49 @@ bool fexists(const char *filename) {
   std::ifstream ifile(filename);
   return (bool)ifile;
 }
+
+
+void jsonError(json j) {
+    cout << "json error: " << j.dump() << "\n"; 
+}
+
+
+labyrinth* fromJsonFile(string  name) {
+    cell * mytarget;
+    ifstream file(name);
+    string str; 
+    getline(file, str);
+    json l = json::parse(str);
+    if (!l.is_array()) jsonError(l) ; 
+    auto s = l.at(1);
+    if (!s.is_array()) jsonError(l) ; 
+    auto rows  = s.at(0);
+    if (!rows.is_number_unsigned()) jsonError(l) ; 
+    auto cols  = s.at(1);
+    if (!cols.is_number_unsigned()) jsonError(l) ; 
+    labyrinth * L = new labyrinth(rows,cols);    
+    while (getline(file, str)){
+        json ex1 = json::parse(str);
+        if (!ex1.is_array()) jsonError(ex1) ;  
+        json ex2 = ex1.at(0);
+        if (!ex2.is_array()) jsonError(ex1) ; 
+        auto r = ex2.at(0) ;
+        auto c = ex2.at(1) ;
+        cout << r << " " << c << "\n"; 
+        auto mycell = L ->  getCell(r,c) ;  
+        json o = ex1.at(1);
+        if (!o.is_object()) jsonError(ex1);
+        for (json::iterator it = o.begin(); it != o.end(); ++it) {
+            cout << it.key() << " : " << it.value() << "\n";
+            json t = it.value();
+            auto tr = t.at(0);
+            auto tc = t.at(1);
+            auto mytarget = L ->  getCell(tr,tc) ; 
+            mycell -> link(mytarget);
+            cout << "target " << tr << " " << tc <<"\n";
+        }
+    }
+    return(L);
+}
+
+

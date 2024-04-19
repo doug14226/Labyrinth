@@ -23,6 +23,7 @@ public:
     int symmetricalQ();
 };
 
+lucca* luccaFromGridJsonFile(string  name);
 
 #endif /* lucca_hpp */
 
